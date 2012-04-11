@@ -63,11 +63,14 @@ public class User extends Model {
   @OneToMany(mappedBy = "to", cascade = CascadeType.ALL)
   public List<Relationship> friendedBy; // A list of the user's friendship history
   
+  @ElasticSearchIgnore
   public boolean subscription; // Whether the user has allowed subscriptions or not
   
+  @ElasticSearchIgnore
   @OneToMany(mappedBy = "subscriber", cascade = CascadeType.ALL)
   public List<Subscription> subscribedTo; // A list of subscriptions the user subscribed to
   
+  @ElasticSearchIgnore
   @OneToMany(mappedBy = "subscribed", cascade = CascadeType.ALL)
   public List<Subscription> subscribers; // A list of subscriptions to the user's subscribers
 
@@ -75,6 +78,18 @@ public class User extends Model {
     this.email = email;
     this.password = Crypto.passwordHash(password);
     this.username = username;
+    // this.education = new ArrayList<Enrollment>();
+  }
+
+  public User(String email, String password, String username, String first_name, String last_name) {
+    this.email = email;
+    this.password = Crypto.passwordHash(password);
+    this.username = username;
+    this.first_name = first_name;
+    this.last_name = last_name;
+    
+    profile = new Profile(this);
+    
     Skins.setSkin(this.profile,"DEFAULT");//set skin as default skin
     // this.education = new ArrayList<Enrollment>();
   }
