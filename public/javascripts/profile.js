@@ -1,4 +1,3 @@
-
 $(document).ready(function()
 {
     $(".defaultText").focus(function(srcc)
@@ -21,3 +20,21 @@ $(document).ready(function()
     
     $(".defaultText").blur();        
 });
+
+  $(document).ready(function(){
+    $('[name="cancel"]').click(function(){
+      $(this).parent().toggle();
+      $(this).parent().parent().siblings('.Data').toggle(); });
+ 
+    $('.EditButton').click(function(){
+      $(this).siblings('.Data').toggle();
+      $(this).siblings('.editData').toggle(); });
+  });
+  
+  $(function() {
+	$( "#datepicker" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+0"
+	});
+  });

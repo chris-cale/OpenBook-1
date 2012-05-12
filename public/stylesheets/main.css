@@ -45,11 +45,15 @@ a:active {
   background-repeat: repeat-x; 
   background-color: #${skin.get("headerBGColor")};
   height: 40px;
-  line-height:30px;  
+  line-height:40px;  
 }
 
 #header a {
 color:white;
+}
+
+#header .dropdown-menu a {
+  color:black;
 }
 
 
@@ -154,10 +158,9 @@ padding: 0px;
 }
 
 .profile-pic {
-position: relative;
-margin-left: 12.5%;
-width: 100%;
-
+  text-align: center;
+  position: relative;
+  width: 100%;
 }
 
 .profile-pic a{
@@ -165,9 +168,9 @@ width: 100%;
 }
 
 .profile-pic img{
-	/*max-width: 140px;*/
+	max-width: 120px;
 	width: 80%;
-height: 80%; /*Resize the profile-picture here, picture will take up all the space*/
+  height: 80%; /*Resize the profile-picture here, picture will take up all the space*/
 }
 
 .profile-pic:hover a{
@@ -207,12 +210,14 @@ height: 80%; /*Resize the profile-picture here, picture will take up all the spa
 
 /** Shared UI Elements **/
 .ui_TextArea {
-  width: 100%;
+  width: 88%;
   resize: none;
   color:grey;
   border: none;
-  margin: none;
+  margin:none;
+  margin-left:5px;
   display: none;
+  outline: black groove 1px;
 }
 
 .ui_TextAreaButton {
@@ -250,7 +255,7 @@ height: 80%; /*Resize the profile-picture here, picture will take up all the spa
 }
 
 .ui_InputContainer {
-  outline: black groove 1px;
+  outline: black groove 0px;
 	width: 100%;
 	height: auto;
 	background-color: white;
@@ -295,7 +300,6 @@ label {
 .comment {
   border: ${skin.get("commentBorderSize")}px solid ${skin.get("commentBorderColor")};
   background-color: #${skin.get("commentBGColor")};
-  width: 420px;
 }
 
 .comment-textarea {
@@ -325,7 +329,7 @@ a.logo:active {text-decoration:none;}
 
 .post {
   width: 100%;
-  border-bottom: 1px solid #dddddd;
+ /* border-bottom: 1px solid #dddddd;*/
    /*Code to make the post stick out against changed background */
   background-color: white;
   outline: #CCCCCC groove 1px;
@@ -343,7 +347,7 @@ a.logo:active {text-decoration:none;}
 }
 
 .post .individual-post {
-  float: right;
+  float: left;
   margin-left: 5px;
   width: 440px;
   font-size: 13px;
@@ -358,13 +362,14 @@ a.logo:active {text-decoration:none;}
 }
 
 .post-content .post-image img{
-  width: 350px;
-  height: auto;
-  
+  max-width: 350px;
+  max-height: 350px;
 }
 
 .post .individual-post-metadata {
   color: gray;
+  width: 100%;
+  background-color: #e8e8e8;
 }
 
 .comment-content {
@@ -423,4 +428,12 @@ width: 1px;
 border-width: 1px;
 border-color:grey;
 border-left-style:groove;
+}
+
+.post-content {
+  overflow:hidden;
+}
+
+.comment-content {
+  overflow:hidden;
 }

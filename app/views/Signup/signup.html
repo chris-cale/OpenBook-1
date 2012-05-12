@@ -1,4 +1,5 @@
 <!DOCTYPE html >
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/signup.css'}" />
 <html>
   <script src=@{'/public/javascripts/jquery-1.6.4.min.js'}></script>
   <script type="text/javascript">
@@ -82,13 +83,19 @@
 	  email2 : $("#confirmemail").val(),
 	  password : $("#password").val(),
 	  password2 : $("#confirmpassword").val(),
+	  code : $("#code").val(),
+	  randomID : $("#randomID").val(),
 	};
 	$.post("@{Signup.signup_user()}", postData, function(data) {
-		if (data != "")
+		if (data != "") {
 			$('#errors').html(data);
+			$.post("@{Signup.get_new_captcha()}", function(id) {
+				$("#randomID").val(id);
+				$("#captchaid").attr('src',"/captcha?id=" + id);
+			});
+		}
 		else {
-			$('#errors').html("Success");
-			window.location = "login"
+			window.location.href = "@{Secure.login}";
 		}
     });
   });
@@ -97,7 +104,7 @@
 	<center>
 		<h2>Sign up</h2>
 		<hr />
-		<table>
+		<table class="SignupFields">
 			<tr>
 
 				<td><label>First Name: </td>
@@ -114,37 +121,44 @@
 				<td><label>E-mail: </td>
 				<td><input type=text id="email" name=newUser.email size="35">
 				</td>
-				<td><label id="emailverification" ></td>
+				<td><label class="Warning" id="emailverification"></td>
 			</tr>
 			<tr>
 			  <td><label>Confirm email: </td>
 				  <td><input id="confirmemail" type=text name=newUser.email2 size="35">
 				  </td>
-				<td><label id="emailverification2" ></td>
+				<td><label class="Warning" id="emailverification2"></td>
 			  <td>
 			</tr>
 			<tr>
 			  <td><label>User name: </td>
 				<td><input id="username" type=text name=newUser.username size="35" maxlength="16">
 				</td>
-				<td><label id="nameverification" ></td>
+				<td><label class="Warning" id="nameverification"></td>
 			  <td>
 			</tr>
 			<tr>
 			  <td><label>Password: </td>
 				  <td><input id="password" type=password name=newUser.password size="35" maxlength="16">
 				  </td>
-				<td><label id="passwordverification" ></td>
+				<td><label class="Warning" id="passwordverification"></td>
 			  <td>
 			</tr>
 			<tr>
 			  <td><label>Confirm password: </td>
 				  <td><input id="confirmpassword" type=password name=newUser.password2 size="35" maxlength="16">
 				  </td>
-				<td><label id="passwordverification2" ></td>
+				<td><label class="Warning" id="passwordverification2"></td>
 			  <td>
 			</tr>
-			
+			<tr>
+			  <td align="left right"><label for="code">Please type the code below: </label>
+			  <br/>
+			  <img id="captchaid" src="@{Signup.captcha(randomID)}" /><br/>
+			  <input type="text" name="code" id="code" size="18" value="" />
+			  <input type="hidden" name="randomID" id="randomID" value="${randomID}" />
+			  </td>
+			</tr>
 		</table>
 		<table>
 
